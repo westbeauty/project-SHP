@@ -15,6 +15,7 @@ const actions = {
 };
 const mutations = {
     CATEGORYLIST(state,data) {
+        data.pop();
         state.categoryList = data;
     }
 };

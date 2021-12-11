@@ -67,7 +67,11 @@ export default {
         // this.$router.push({name:'search',query:{k:this.keyword.toUpperCase()}})
         // 3.params参数可以传递也可以不传递，但是如果传递是空串，如何解决？ 答：使用undefined解决
         // this.$router.push({name:'search',params:{keyword:'' || undefined},query:{k:this.keyword.toUpperCase()}})
-        this.$router.push({name:'search',params:{keyword:this.keyword},query:{k:this.keyword.toUpperCase()}})
+        
+          if (this.$route.query) {
+            this.$router.push({name:'search',params:{keyword:this.keyword},query:this.$route.query})
+          }
+        
       }
   },
 };
