@@ -6,8 +6,7 @@
         <TodayRecommend/>
         <Rank/>
         <Like/>
-        <Floor/>
-        <Floor/>
+        <Floor v-for="f in floorList" :key="f.id" :eveyfloor='f' />
         <Brand/>
     </div>
 </template>
@@ -21,7 +20,15 @@ import Floor from './Floor/index.vue'
 import Brand from './Brand/index.vue'
 export default {
     name:'Home',
-    components:{ListContainer,TodayRecommend,Rank,Like,Floor,Brand}
+    components:{ListContainer,TodayRecommend,Rank,Like,Floor,Brand},
+    mounted() {
+        this.$store.dispatch('getFloorList')
+    },
+    computed:{
+        floorList() {
+            return this.$store.state.home.floorList
+        }
+    }
 
 }
 </script>
