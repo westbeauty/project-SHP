@@ -18,7 +18,7 @@
             <h3>
               <a
                 :data-categoryName="c1.categoryName"
-                :data-categroy1Id="c1.categoryId"
+                :data-category1Id="c1.categoryId"
                 >{{ c1.categoryName }}</a
               >
             </h3>
@@ -32,7 +32,7 @@
                   <dt>
                     <a
                       :data-categoryName="c2.categoryName"
-                      :data-categroy2Id="c2.categoryId"
+                      :data-category2Id="c2.categoryId"
                       >{{ c2.categoryName }}</a
                     >
                   </dt>
@@ -40,7 +40,7 @@
                     <em v-for="c3 in c2.categoryChild" :key="c3.categoryId">
                       <a
                         :data-categoryName="c3.categoryName"
-                        :data-categroy3Id="c3.categoryId"
+                        :data-category3Id="c3.categoryId"
                         >{{ c3.categoryName }}</a
                       >
                     </em>
@@ -83,25 +83,24 @@ export default {
       let element = e.target;
       // 获取到当前触发这个事件的所有节点，带有data-categoryName的属性就是a标签
       //节点有一个dataset属性
-      let categroyname = element.dataset.categoryname;
-      let categroy1id = element.dataset.categroy1id;
-      let categroy2id = element.dataset.categroy2id;
-      let categroy3id = element.dataset.categroy3id;
-      console.log(element.dataset);
-      console.log(categroyname);
+      let categoryname = element.dataset.categoryname;
+      let category1id = element.dataset.category1id;
+      let category2id = element.dataset.category2id;
+      let category3id = element.dataset.category3id;
+      
 
       //几级分类如何区分
       // 把子节点当中a标签，加上自定义属性data-category几Id
-      if (categroyname) {
+      if (categoryname) {
         //整理路由参数
         let loc = { name: "search" };
-        let query = { categroyName: categroyname };
-        if (categroy1id) {
-          query.categroy1Id = categroy1id;
-        } else if (categroy2id) {
-          query.categroy2Id = categroy2id;
+        let query = { categoryName: categoryname };
+        if (category1id) {
+          query.category1Id = category1id;
+        } else if (category2id) {
+          query.category2Id = category2id;
         } else {
-          query.categroy3Id = categroy3id;
+          query.category3Id = category3id;
         }
         loc.query = query;
         if (this.$route.params) {

@@ -7,8 +7,8 @@
           <p>尚品汇欢迎您！</p>
           <p>
             <span>请</span>
-            <router-link to="/login" >登录</router-link>
-            <router-link to='/register' class="register">免费注册</router-link>
+            <router-link to="/login">登录</router-link>
+            <router-link to="/register" class="register">免费注册</router-link>
           </p>
         </div>
         <div class="typeList">
@@ -38,7 +38,11 @@
             class="input-error input-xxlarge"
             v-model="keyword"
           />
-          <button class="sui-btn btn-xlarge btn-danger" type="button" @click="goSearch">
+          <button
+            class="sui-btn btn-xlarge btn-danger"
+            type="button"
+            @click="goSearch"
+          >
             搜索
           </button>
         </form>
@@ -51,28 +55,37 @@
 export default {
   name: "Header",
   data() {
-      return {
-          keyword:''
-      }
+    return {
+      keyword: "",
+    };
   },
   methods: {
-      goSearch() {
-        //   路由传参
-        //模板字符串传参
-        //   this.$router.push(`/search/${this.keyword}?k=${this.keyword.toUpperCase()}`)
-        //对象写法
-        // this.$router.push({name:'search',params:{keyword:this.keyword},query:{k:this.keyword.toUpperCase()}})
-        // 1.路由传递参数(对象写法)，path不可以结合params参数一起使用。
-        // 2.如何指定params参数可传，不可传？ 答：占位符后面加问号，否则url有问题
-        // this.$router.push({name:'search',query:{k:this.keyword.toUpperCase()}})
-        // 3.params参数可以传递也可以不传递，但是如果传递是空串，如何解决？ 答：使用undefined解决
-        // this.$router.push({name:'search',params:{keyword:'' || undefined},query:{k:this.keyword.toUpperCase()}})
-        
-          if (this.$route.query) {
-            this.$router.push({name:'search',params:{keyword:this.keyword},query:this.$route.query})
-          }
-        
+    goSearch() {
+      //   路由传参
+      //模板字符串传参
+      //   this.$router.push(`/search/${this.keyword}?k=${this.keyword.toUpperCase()}`)
+      //对象写法
+      // this.$router.push({name:'search',params:{keyword:this.keyword},query:{k:this.keyword.toUpperCase()}})
+      // 1.路由传递参数(对象写法)，path不可以结合params参数一起使用。
+      // 2.如何指定params参数可传，不可传？ 答：占位符后面加问号，否则url有问题
+      // this.$router.push({name:'search',query:{k:this.keyword.toUpperCase()}})
+      // 3.params参数可以传递也可以不传递，但是如果传递是空串，如何解决？ 答：使用undefined解决
+      // this.$router.push({name:'search',params:{keyword:'' || undefined},query:{k:this.keyword.toUpperCase()}})
+
+      if (this.$route.query) {
+        this.$router.push({
+          name: "search",
+          params: { keyword: this.keyword },
+          query: this.$route.query,
+        });
       }
+    },
+    clearIput() {
+      this.keyword = "";
+    },
+  },
+  mounted() {
+    this.$bus.$on("clearIput", this.clearIput);
   },
 };
 </script>
