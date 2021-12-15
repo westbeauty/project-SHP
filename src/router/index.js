@@ -6,6 +6,7 @@ import Home from '@/pages/Home/index.vue'
 import Login from '@/pages/Login/index.vue'
 import Register from '@/pages/Register/index.vue'
 import Search from '@/pages/Search/index.vue'
+import Detail from '@/pages/Detail/index.vue'
 
 export default new VueRouter({
     routes:[
@@ -45,6 +46,14 @@ export default new VueRouter({
         {
             path:'*',
             redirect:'/home'
-        }
-    ]
+        },
+        {
+            path:'/detail/:skuId',
+            component:Detail,
+            meta:{show:true}
+        },
+    ],
+    scrollBehavior (to, from, savedPosition) {
+        return { y: 0 }
+      }
 })

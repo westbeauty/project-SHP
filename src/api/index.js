@@ -21,3 +21,7 @@ export const reqFloorList = function() {
 export const reqSearchList = function(params) {
     return requests({url:'/list',data:params,method:'post'})
 }
+
+export const reqDetaillist = function(skuId) {
+    return requests({url:`/item/${ skuId }`,method:'get'})
+}

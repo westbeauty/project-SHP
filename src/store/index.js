@@ -3,6 +3,7 @@ import Vue from 'vue';
 
 import home from './home'
 import search from './search'
+import detail from './detail'
 
 Vue.use(Vuex);
 // //仓库存储数据的地方
@@ -18,6 +19,6 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     modules:{
-        home,search
+        home,search,detail
     }
 })

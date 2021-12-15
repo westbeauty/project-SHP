@@ -36,12 +36,14 @@
             type="text"
             id="autocomplete"
             class="input-error input-xxlarge"
+            @keyup.enter="goSearch"
             v-model="keyword"
           />
           <button
             class="sui-btn btn-xlarge btn-danger"
             type="button"
             @click="goSearch"
+            
           >
             搜索
           </button>
