@@ -1,4 +1,6 @@
 import { reqDetaillist } from '../../api/index'
+import {reqAddShopCart} from '../../api/index'
+import {getUuid} from '../../uuid/uuid'
 const actions = {
     getDetailInfo(context, value) {
         reqDetaillist(value).then(
@@ -8,6 +10,11 @@ const actions = {
                 }
             }
         ).catch(function (err) { console.log(err) })
+    },
+    addShopCart(context,{skuId,skuNum}) {
+        
+        //服务器写入数据成功，并没有返回其他的数据，只是返回code，代表这次操作成功
+       return reqAddShopCart(skuId,skuNum);
     }
 };
 const mutations = {
@@ -16,7 +23,8 @@ const mutations = {
     }
 };
 const state = {
-    Detaillist:{}
+    Detaillist:{},
+    uuid_token:getUuid()
 };
 const getters = {
     categoryView(state) {

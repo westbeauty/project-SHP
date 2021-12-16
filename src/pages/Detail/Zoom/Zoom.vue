@@ -22,6 +22,7 @@ export default {
     changerealImg(index) {
       this.currentIndex = index;
     },
+    //放大镜功能
     handler(event) {
       let mask = this.$refs.mask;
       let big = this.$refs.big;

@@ -7,6 +7,8 @@ import Login from '@/pages/Login/index.vue'
 import Register from '@/pages/Register/index.vue'
 import Search from '@/pages/Search/index.vue'
 import Detail from '@/pages/Detail/index.vue'
+import AddCartSuccess from '../pages/AddCartSuccess/index.vue'
+import ShopCart from '../pages/ShopCart'
 
 export default new VueRouter({
     routes:[
@@ -52,6 +54,18 @@ export default new VueRouter({
             component:Detail,
             meta:{show:true}
         },
+        {
+            path:'/addcartsuccess',
+            name:'addcartsuccess',
+            component:AddCartSuccess,
+            meta:{show:true}
+        },
+        {
+            path:'/shopcart',
+            name:'shopcart',
+            component:ShopCart,
+            meta:{show:true}
+        }
     ],
     scrollBehavior (to, from, savedPosition) {
         return { y: 0 }

@@ -84,7 +84,7 @@
                   :class="{ active: SaleValue.isChecked === '1' }"
                   v-for="SaleValue in supSale.spuSaleAttrValueList"
                   :key="SaleValue.id"
-                  @click="changeActive(SaleValue,supSale.spuSaleAttrValueList)"
+                  @click="changeActive(SaleValue, supSale.spuSaleAttrValueList)"
                 >
                   {{ SaleValue.saleAttrValueName }}
                 </dd>
@@ -92,12 +92,23 @@
             </div>
             <div class="cartWrap">
               <div class="controls">
-                <input autocomplete="off" class="itxt" />
-                <a href="javascript:" class="plus">+</a>
-                <a href="javascript:" class="mins">-</a>
+                <input
+                  autocomplete="off"
+                  class="itxt"
+                  v-model="skuNum"
+                  @change="changeskuNum($event)"
+                />
+                <a href="javascript:" class="plus" @click="skuNum++">+</a>
+                <a
+                  href="javascript:"
+                  class="mins"
+                  @click="skuNum > 1 ? skuNum-- : (skuNum = 1)"
+                  >-</a
+                >
               </div>
               <div class="add">
-                <a href="javascript:">加入购物车</a>
+                <!-- 路由跳转前，需要发请求给服务器，通知服务器存储购物车信息 -->
+                <a @click="addShopcar">加入购物车</a>
               </div>
             </div>
           </div>
@@ -365,12 +376,45 @@ export default {
   },
   methods: {
     //利用排他性，展示售卖属性
-    changeActive(SaleValue,arr) {
-        arr.forEach(function(item){
-          item.isChecked = '0'
+    changeActive(SaleValue, arr) {
+      arr.forEach(function (item) {
+        item.isChecked = "0";
+      });
+      SaleValue.isChecked = "1";
+    },
+    changeskuNum(e) {
+      let value = e.target.value * 1;
+      if (isNaN(value) || value < 1) {
+        this.skuNum = 1;
+      } else {
+        this.skuNum = parseInt(value);
+      }
+    },
+    //添加购物车按钮
+    addShopcar() {
+      //1.发请求，将产品加入服务器
+      this.$store.dispatch("addShopCart", {
+          skuId: this.$route.params.skuId,
+          skuNum: this.skuNum,
+        })
+        .then((res)=>{
+            if (res.code === 200) {
+              //进行路由跳转
+              //简单数据，通过quey传，复杂数据建议结合sessionstorage技术
+              sessionStorage.setItem('SKUINFO',JSON.stringify(this.skuInfo))
+              this.$router.push({name:'addcartsuccess',query:{skuNum:this.skuNum}})
+            } else {
+              alert('对不起，添加失败，请稍后重试')
+            }
         });
-        SaleValue.isChecked='1'
-    }
+      //2.服务器存储成功--进行路由跳转
+      //3.失败，给用户进行提示
+    },
+  },
+  data() {
+    return {
+      skuNum: 1,
+    };
   },
 };
 </script>

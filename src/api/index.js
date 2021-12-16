@@ -25,3 +25,12 @@ export const reqSearchList = function(params) {
 export const reqDetaillist = function(skuId) {
     return requests({url:`/item/${ skuId }`,method:'get'})
 }
+
+//购物车接口
+export const reqAddShopCart = function(skuId,skuNum) {
+    return requests({url:`/cart/addToCart/${ skuId }/${ skuNum }`,method:'post'})
+}
+
+export const reqShopList = function () {
+     return requests({url:'/cart/cartList',method:'get'})
+}

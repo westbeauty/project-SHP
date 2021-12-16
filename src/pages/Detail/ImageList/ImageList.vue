@@ -39,9 +39,9 @@ export default {
               nextEl: ".swiper-button-next",
               prevEl: ".swiper-button-prev",
             },
-            loop: true,
+            
             //展示图片个数
-            slidesPerView: 5,
+            slidesPerView: 3,
             //切换图片个数
             slidesPerGroup: 1,
           });
