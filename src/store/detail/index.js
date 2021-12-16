@@ -24,7 +24,12 @@ const getters = {
     },
     skuInfo(state) {
        return state.Detaillist.skuInfo || {}
+    },
+    //产品售卖属性的简化
+    spuSaleAttrList(state) {
+        return state.Detaillist.spuSaleAttrList || [];
     }
+
 };
 
 export default {
