@@ -26,11 +26,21 @@ export const reqDetaillist = function(skuId) {
     return requests({url:`/item/${ skuId }`,method:'get'})
 }
 
-//购物车接口
+//添加购物车接口
 export const reqAddShopCart = function(skuId,skuNum) {
     return requests({url:`/cart/addToCart/${ skuId }/${ skuNum }`,method:'post'})
 }
-
+//获取购物车接口
 export const reqShopList = function () {
      return requests({url:'/cart/cartList',method:'get'})
+}
+
+//购物车删除接口
+export const reqDeleteShopcartById = function(skuId) {
+    return requests({url:`/cart/deleteCart/${skuId}`,method:'delete'})
+}
+
+//购物车勾选接口
+export  const reqUpdateShopCarbyId= function(skuId,isChecked)  {
+    return requests({url:`/cart/checkCart/${skuId}/${isChecked}`})
 }
